@@ -7,24 +7,24 @@ import { Providers } from "./providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Flame Minter",
-  description: "Flames NFT Collection Minting Website",
-  applicationName: "Flame Minter",
+  title: "Play-2-EARN",
+  description: "Play-2-EARN is a game where you can draw NFT cards and win prizes in $EARN tokens",
+  applicationName: "Play-2-EARN",
   twitter: {
     card: "summary_large_image",
-    site: "@site",
-    creator: "@creator",
-    images: "https://app.buyholdearn.com/FLAMES.jpg",
+    site: "play.buyholdearn.com",
+    creator: "buyholdearn",
+    images: "https://play.buyholdearn.com/play.jpg",
   },
   openGraph: {
     type: "website",
-    url: "https://app.buyholdearn.com",
-    title: "Flame Minter",
-    description: "Flames NFT Collection Minting Website",
-    siteName: "Flame Minter",
+    url: "https://play.buyholdearn.com",
+    title: "Play-2-EARN",
+    description: "Play-2-EARN is a game where you can draw NFT cards and win prizes in $EARN tokens",
+    siteName: "Play-2-EARN",
     images: [
       {
-        url: "https://app.buyholdearn.com/FLAMES.jpg",
+        url: "https://play.buyholdearn.com/play.jpg",
       },
     ],
   },

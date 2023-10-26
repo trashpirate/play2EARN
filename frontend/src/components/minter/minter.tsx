@@ -59,6 +59,7 @@ export default function Minter({}: Props) {
   const [buttonText, setButtonText] = useState<string>("MINT");
 
   const [imagePath, setImagePath] = useState<string>("/logo.jpg");
+  const [message, setMessage] = useState<string>("Draw a card and win up to 600K $EARN!");
 
   // get account address
   const { address, isConnecting, isDisconnected, isConnected } = useAccount({});
@@ -224,15 +225,17 @@ export default function Minter({}: Props) {
         let imageURL: string = "/unrevealed.jpg";
 
         const res = await fetch(
-          `https://bafybeieokkbwo2hp3eqkfa5chypmevxjii275icwxnuc7dmuexi3qsuvu4.ipfs.nftstorage.link/${nftLatest.tokenId}`,
+          `https://bafybeigjenvitrwsrknmvatdtt3rxv4rgswamwl63souemwq5cuktyzrgq.ipfs.nftstorage.link/${nftLatest.tokenId}`,
         );
         const json = await res.json();
+        setMessage(json.description);
         const [prefix, separator, url, color, name] = json.image.split("/");
-        imageURL = `https://bafybeifzdbsgwpnj37c3tzj4pkut3b2pgf2u75mf3zmbto657ep2ubwf6a.ipfs.nftstorage.link/${color}/${name}`;
+        imageURL = `https://bafybeia6bsfqa4zugsyx4b35x6gueg6h4ljlq5s66oazg7yxqx3oyujs6u.ipfs.nftstorage.link/${color}/${name}`;
         setImagePath(imageURL);
       } else {
         console.log("nft fetch failed");
-        setImagePath("/logo.jpg");
+        setImagePath("/play.jpg");
+        setMessage("Draw a card and win up to 600K $EARN!");
       }
     }
 
@@ -241,7 +244,7 @@ export default function Minter({}: Props) {
     } else if (!isMintLoading && isMintSuccess && isConnected) {
       getNFT();
     } else {
-      setImagePath("/logo.jpg");
+      setImagePath("/play.jpg");
     }
   }, [isMintLoading, isMintSuccess]);
 
@@ -253,8 +256,8 @@ export default function Minter({}: Props) {
       approvedAmount != undefined &&
       approvedAmount >= transferAmount
     )
-      setButtonText("MINT NOW");
-    else setButtonText("MINT");
+      setButtonText("DRAW NOW");
+    else setButtonText("DRAW");
   }, [
     isMintLoading,
     approvalLoading,
@@ -265,7 +268,7 @@ export default function Minter({}: Props) {
 
   function mintButton() {
     if (isDisconnected && batchLimit) {
-      return <div>Connect your wallet to mint</div>;
+      return <div>Connect your wallet to draw a card</div>;
     } else if (batchLimit) {
       // mint is enabled
       // =====================================================
@@ -291,7 +294,7 @@ export default function Minter({}: Props) {
             disabled={true}
             onClick={(e) => {}}
           >
-            {`Max. ${maxPerWallet} NFTs/Wallet`}
+            {`Max. ${maxPerWallet} Cards/Wallet`}
           </button>
         );
         // TODO: no more nfts to mint
@@ -332,10 +335,13 @@ export default function Minter({}: Props) {
     if (canMint) {
       return (
         <div className="pt-2">
+          <div className="h-14 flex justify-center">
+            <h1 className="align-middle my-auto text-amber-600 text-center">{message}</h1>
+          </div>
           <div className="my-4 justify-center text-center">
             <form>
               <label>
-                Enter number of NFTs:
+                Enter number of Cards:
                 <input
                   className="mx-auto ml-2 rounded bg-gray-800 p-1 text-right"
                   type="number"
@@ -356,7 +362,7 @@ export default function Minter({}: Props) {
     } else {
       return (
         <div className="flex-col justify-center gap-4 pt-4 text-center">
-          <p className="mb-4">MINT IS LIVE!</p>
+          <p className="mb-4">GAME IS LIVE!</p>
           <div className="mx-auto my-2 h-10 w-fit rounded-md bg-white px-4 py-2 font-bold text-black hover:bg-slate-400">
             <a
               className="mx-auto"
@@ -372,13 +378,13 @@ export default function Minter({}: Props) {
   }
 
   return (
-    <div className="mx-auto h-fit w-full max-w-sm flex-col justify-between rounded-lg bg-black p-8 md:max-w-none">
+    <div className="mx-auto h-fit w-full max-w-sm flex-col justify-between rounded-lg bg-black p-8 md:max-w-none shadow-inner-sym">
       <div className="mx-auto mb-4 w-full max-w-xs overflow-hidden rounded border-2 border-white bg-white">
         <Image
           src={imagePath}
           width={250}
           height={250}
-          alt="Flame NFTs"
+          alt="Play-2-EARN Cards"
           style={{
             width: "100%",
             height: "auto",
@@ -386,8 +392,8 @@ export default function Minter({}: Props) {
           priority
         />
         <div className="m-4">
-          <div className="m-1 font-bold text-black">{"FLAMES MINT"}</div>
-          <div className="m-1 text-black">{"NFT Price: 100,000 EARN"}</div>
+          <div className="m-1 font-bold text-black">{"PLAY-2-EARN GAME"}</div>
+          <div className="m-1 text-black">{"100,000 $EARN PER DRAW"}</div>
         </div>
       </div>
       {mintPanel(batchLimit)}

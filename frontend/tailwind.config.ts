@@ -9,14 +9,20 @@ const config: Config = {
   theme: {
     extend: {
       backgroundImage: {
-        'hero-pattern': "url('/FLAMES_dark.jpg')",
+        'hero-pattern': "url('/ALL_dark.jpg')",
       },
       fontFamily: {
         body: ['IBM Plex Sans']
       },
       screens: {
          'xs': '465px',
-      }
+      },
+      boxShadow: {
+        'inner-sym': 'inset 0px 0px 5px 0px #f59e0b',
+      },
+      dropShadow: {
+        'text': '2px 2px 2px #f59e0b',
+      },
     },
   },
   plugins: [],

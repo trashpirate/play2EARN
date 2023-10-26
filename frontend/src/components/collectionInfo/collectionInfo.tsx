@@ -7,10 +7,21 @@ import { nftABI } from "@/assets/nftABI";
 
 import Image from "next/image";
 import CopyToClipboard from "../copyToClipboard";
+import {Alchemy, Network, NftMetadataBatchToken} from "alchemy-sdk";
 const NFT_CONTRACT = process.env.NEXT_PUBLIC_NFT_CONTRACT as `0x${string}`;
 const TOKEN_CONTRACT = process.env.NEXT_PUBLIC_TOKEN_CONTRACT as `0x${string}`;
 
 type Props = {};
+
+const config = {
+  apiKey: process.env.NEXT_PUBLIC_ALCHEMY_API_KEY,
+  network:
+    process.env.NEXT_PUBLIC_TESTNET == "true"
+      ? Network.ETH_GOERLI
+      : Network.ETH_MAINNET,
+};
+
+const alchemy = new Alchemy(config);
 
 export default function CollectionInfo({}: Props) {
   const [totalSupply, setTotalSupply] = useState<number | undefined>(undefined);
@@ -40,7 +51,7 @@ export default function CollectionInfo({}: Props) {
     cacheTime: 1000,
   });
 
-  useEffect(() => {
+  useEffect(() => {    
     if (data != undefined) {
       setTotalSupply(Number(data));
     }
@@ -63,7 +74,7 @@ export default function CollectionInfo({}: Props) {
     if (isLoading) {
       text = "Loading...";
     } else if (isSuccess && totalSupply != undefined) {
-      text = `${1000 - totalSupply}`;
+      text = `${100 - totalSupply}`;
     } else {
       text = "---";
     }
@@ -72,27 +83,27 @@ export default function CollectionInfo({}: Props) {
 
   return (
     <div className="mx-auto w-full pb-8 md:mr-0">
-      <div className="mx-auto max-w-sm rounded-md bg-black p-8 ">
+      <div className="mx-auto max-w-sm rounded-md bg-black p-8  md:max-w-none shadow-inner-sym">
         <Image
-          className="mb-4 h-20 w-full overflow-hidden object-cover sm:h-28"
-          src={"/featured_image.jpg"}
-          width={100}
-          height={100}
-          alt="Flame NFTs"
+          className="mb-4 h-20 w-full overflow-hidden object-fit sm:h-28"
+          src={"/banner.jpg"}
+          width={800}
+          height={300}
+          alt="Play-2-EARN Card"
         />
         <h2 className="mb-4 border-b-2 border-yellow-500 pb-2 text-xl">
-          FLAMES COLLECTION
+          PLAY-2-EARN GAME
         </h2>
         <div className="pb-4 text-sm text-slate-600">
           <p>Contract:</p>
           <CopyToClipboard text={NFT_CONTRACT} copyText={NFT_CONTRACT} />
         </div>
         <div className="flex justify-between">
-          <h3>NFTs minted: </h3>
+          <h3>Cards drawn: </h3>
           <p>{getTotalSupplyString()}</p>
         </div>
         <div className="flex justify-between">
-          <h3>NFTs remaining: </h3>
+          <h3>Cards remaining: </h3>
           <p>{getNftsRemainingString()}</p>
         </div>
       </div>

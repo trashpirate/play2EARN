@@ -12,6 +12,12 @@ import {
 
 type Props = {};
 
+    // async function getNFTMetadata(tokenId: number) {
+    //   const meta = await alchemy.nft.getNftMetadata(NFT_CONTRACT,tokenId.toString(),{});
+    //   const trait = meta.rawMetadata?.attributes?.[0]['value']
+    //   console.log(trait)
+    // }
+
 export default function AdminPanel({}: Props) {
   const [batchLimit, setBatchLimit] = useState<string>("");
   const [maxPerWallet, setMaxPerWallet] = useState<string>("");
