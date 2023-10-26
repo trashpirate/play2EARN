@@ -82,7 +82,7 @@ export default function CollectionInfo({}: Props) {
   }
 
   return (
-    <div className="mx-auto w-full pb-8 md:mr-0">
+    <div className="mx-auto w-full pb-8">
       <div className="mx-auto max-w-sm rounded-md bg-black p-8  md:max-w-none shadow-inner-sym">
         <Image
           className="mb-4 h-20 w-full overflow-hidden object-fit sm:h-28"

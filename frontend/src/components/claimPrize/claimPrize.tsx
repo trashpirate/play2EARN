@@ -84,9 +84,8 @@ export default function ClaimPrize({}: Props) {
   }
 
   return (
-    <div className="mx-auto w-full pb-8 md:mr-0">
+    <div className="mx-auto w-full">
       <div className="mx-auto max-w-sm rounded-md bg-black p-8  md:max-w-none shadow-inner-sym">
-        
         <h2 className="mb-4 border-b-2 border-yellow-500 pb-2 text-xl uppercase">
           Claim your prize
         </h2>

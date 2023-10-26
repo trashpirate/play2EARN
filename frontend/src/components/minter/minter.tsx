@@ -378,7 +378,7 @@ export default function Minter({}: Props) {
   }
 
   return (
-    <div className="mx-auto h-fit w-full max-w-sm flex-col justify-between rounded-lg bg-black p-8 md:max-w-none shadow-inner-sym">
+    <div className="mx-auto h-full w-full max-w-sm flex-col justify-between rounded-lg bg-black p-8 md:max-w-none shadow-inner-sym">
       <div className="mx-auto mb-4 w-full max-w-xs overflow-hidden rounded border-2 border-white bg-white">
         <Image
           src={imagePath}

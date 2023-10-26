@@ -13,13 +13,13 @@ export default function Home() {
       <div className="mx-auto w-full flex-col items-center justify-between xl:w-4/5 2xl:w-3/4">
         <Navbar></Navbar>
         <div className="grid w-full grid-cols-1 justify-between gap-4 md:grid-cols-3 justify-items-stretch">
-          <div className="flex-col justify-between ">
+          <div className="w-full h-full flex-col justify-between">
             <CollectionInfo></CollectionInfo>
             <AccountInfo></AccountInfo>
           </div>
 
           <Minter></Minter>
-          <div className="w-full flex-col justify-between">
+          <div className="w-full h-full flex-col justify-between">
             <Nfts></Nfts>
             <ClaimPrize></ClaimPrize>
           </div>
