@@ -8,7 +8,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Play-2-EARN",
-  description: "Play-2-EARN is a game where you can draw NFT cards and win prizes in $EARN tokens",
+  description:
+    "Play-2-EARN is a fun lottery game where you can draw NFT cards and win prizes in $EARN tokens.",
   applicationName: "Play-2-EARN",
   twitter: {
     card: "summary_large_image",
@@ -20,7 +21,8 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://play.buyholdearn.com",
     title: "Play-2-EARN",
-    description: "Play-2-EARN is a game where you can draw NFT cards and win prizes in $EARN tokens",
+    description:
+      "Play-2-EARN is a fun lottery game where you can draw NFT cards and win prizes in $EARN tokens.",
     siteName: "Play-2-EARN",
     images: [
       {
