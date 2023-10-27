@@ -35,6 +35,8 @@ export default function Nfts({}: Props) {
     undefined,
   );
   const [nftsOwned, setNftsOwned] = useState<NFTMeta[] | null>(null);
+  const [totalWin, setTotalWin] = useState<number>(0);
+
 
   // get account address
   const { address, isConnecting, isDisconnected, isConnected } = useAccount({});
@@ -77,7 +79,15 @@ export default function Nfts({}: Props) {
       const nfts = await alchemy.nft.getNftsForOwner(address as string, {
         contractAddresses,
       });
-
+      let totalWin: number = 0;
+      for (const nft of nfts["ownedNfts"]) {
+          const id = nft.tokenId
+            const meta = await alchemy.nft.getNftMetadata(NFT_CONTRACT, id,{});
+            const trait = meta.rawMetadata?.attributes?.[0]['value'].slice(0,3);
+            const win = trait == 'ZER' ? 0 : Number(trait);
+            totalWin += win;
+      }
+      setTotalWin(totalWin);
       let nftArray: NFTMeta[] = [];
       const maxShow = maxPerWallet ? maxPerWallet : 10;
       for (let index = 1; index <= maxShow; index++) {
@@ -118,10 +128,10 @@ export default function Nfts({}: Props) {
   }, [isConnected, totalSupply, address, maxPerWallet]);
 
   return (
-    <div className="h-fit pb-8 w-full justify-self-stretch">
-      <div className="mx-auto max-w-sm rounded-md bg-black p-8 sm:w-full md:max-w-none shadow-inner-sym">
-        <h2 className="border-b-2 border-yellow-500 pb-2 text-xl uppercase">
-          Your Cards
+    <div className="pb-8 w-full h-full">
+      <div className="mx-auto max-w-sm rounded-md bg-black p-8 sm:w-full md:max-w-none shadow-inner-sym h-full">
+        <h2 className="border-b-2 border-yellow-500 pb-2 text-xl uppercase text-justify">
+          {`Your Cards  -  Win: ${totalWin}K $EARN`}
         </h2>
         <div className="my-4 min-h-max">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 place-content-center gap-4 ">

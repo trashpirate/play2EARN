@@ -85,11 +85,12 @@ export default function CollectionInfo({}: Props) {
     <div className="mx-auto w-full pb-8">
       <div className="mx-auto max-w-sm rounded-md bg-black p-8  md:max-w-none shadow-inner-sym">
         <Image
-          className="mb-4 h-20 w-full overflow-hidden object-fit sm:h-28"
+          className="mb-4 h-20 w-full overflow-hidden object-fill sm:h-28"
           src={"/banner.jpg"}
           width={800}
           height={300}
           alt="Play-2-EARN Card"
+          style={{width: "100%", height: "auto"}}
         />
         <h2 className="mb-4 border-b-2 border-yellow-500 pb-2 text-xl">
           PLAY-2-EARN GAME

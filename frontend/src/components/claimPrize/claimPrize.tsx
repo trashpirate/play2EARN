@@ -94,7 +94,7 @@ export default function ClaimPrize({}: Props) {
           <CopyToClipboard text={CLAIM_ADDRESS} copyText={CLAIM_ADDRESS} />
         </div>
         <div>
-            To claim your prize, send your NFT Card to the address above and you will receive your prize within 24hrs.
+            To claim your prize, send your winning NFT Cards to the address above and you will receive your prize within 24hrs.
         </div>
         
       </div>

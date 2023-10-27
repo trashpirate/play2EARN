@@ -4,7 +4,7 @@ type Props = {};
 
 export default function Navbar({}: Props) {
   return (
-    <nav className="mx-auto mb-8 mt-3 flex justify-between gap-5 align-middle md:w-full">
+    <nav className="mx-auto mb-16 mt-3 flex justify-between gap-5 align-middle md:w-full">
       <div className="my-auto h-fit w-fit flex-row rounded-md border-2 border-white bg-white font-bold text-black hover:bg-slate-400 sm:w-36 sm:justify-between">
         <a
           className="pointer-events-auto mx-auto flex items-center text-right align-middle text-lg uppercase sm:gap-4 lg:p-0"

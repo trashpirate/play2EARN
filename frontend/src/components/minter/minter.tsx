@@ -59,7 +59,9 @@ export default function Minter({}: Props) {
   const [buttonText, setButtonText] = useState<string>("MINT");
 
   const [imagePath, setImagePath] = useState<string>("/logo.jpg");
-  const [message, setMessage] = useState<string>("Draw a card and win up to 600K $EARN!");
+  const [message, setMessage] = useState<string>(
+    "Draw a card and win up to 600K $EARN!",
+  );
 
   // get account address
   const { address, isConnecting, isDisconnected, isConnected } = useAccount({});
@@ -220,15 +222,27 @@ export default function Minter({}: Props) {
       const nfts = await alchemy.nft.getNftsForOwner(address as string, {
         contractAddresses,
       });
-      const nftLatest = nfts["ownedNfts"].at(-1);
-      if (nftLatest != undefined) {
+      if (nfts != undefined) {
+        let totalWin: number = 0;
+        for (const nft of nfts["ownedNfts"]) {
+          const id = nft.tokenId;
+          const meta = await alchemy.nft.getNftMetadata(NFT_CONTRACT, id, {});
+          const trait = meta.rawMetadata?.attributes?.[0]["value"].slice(0, 3);
+          const win = trait == "ZER" ? 0 : Number(trait);
+          totalWin += win;
+        }
+        if (totalWin > 0)
+          setMessage(`Congrats, you won a total of ${totalWin}K EARN tokens!`);
+        else setMessage("Too bad, no win this time!");
+
+        const nftLatest = nfts["ownedNfts"].at(-1);
+
         let imageURL: string = "/unrevealed.jpg";
 
         const res = await fetch(
           `https://bafybeigjenvitrwsrknmvatdtt3rxv4rgswamwl63souemwq5cuktyzrgq.ipfs.nftstorage.link/${nftLatest.tokenId}`,
         );
         const json = await res.json();
-        setMessage(json.description);
         const [prefix, separator, url, color, name] = json.image.split("/");
         imageURL = `https://bafybeia6bsfqa4zugsyx4b35x6gueg6h4ljlq5s66oazg7yxqx3oyujs6u.ipfs.nftstorage.link/${color}/${name}`;
         setImagePath(imageURL);
@@ -335,8 +349,10 @@ export default function Minter({}: Props) {
     if (canMint) {
       return (
         <div className="pt-2">
-          <div className="h-14 flex justify-center">
-            <h1 className="align-middle my-auto text-amber-600 text-center">{message}</h1>
+          <div className="flex h-14 justify-center">
+            <h1 className="my-auto text-center align-middle text-amber-600">
+              {message}
+            </h1>
           </div>
           <div className="my-4 justify-center text-center">
             <form>
@@ -378,7 +394,7 @@ export default function Minter({}: Props) {
   }
 
   return (
-    <div className="mx-auto h-full w-full max-w-sm flex-col justify-between rounded-lg bg-black p-8 md:max-w-none shadow-inner-sym">
+    <div className="mx-auto h-full w-full max-w-sm flex-col justify-between rounded-lg bg-black p-8 shadow-inner-sym md:max-w-none">
       <div className="mx-auto mb-4 w-full max-w-xs overflow-hidden rounded border-2 border-white bg-white">
         <Image
           src={imagePath}

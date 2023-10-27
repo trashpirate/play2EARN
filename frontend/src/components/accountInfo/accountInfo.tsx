@@ -112,8 +112,8 @@ export default function AccountInfo({}: Props) {
   }
 
   return (
-    <div className="mx-auto w-full">
-      <div className="mx-auto max-w-sm rounded-md  bg-black p-8 md:max-w-none shadow-inner-sym">
+    <div className="h-full w-full ">
+      <div className="mx-auto max-w-sm rounded-md  bg-black p-8 md:max-w-none shadow-inner-sym h-full">
         <h2 className="mb-4 border-b-2 border-yellow-500 pb-2 text-xl">
           ACCOUNT INFO
         </h2>
