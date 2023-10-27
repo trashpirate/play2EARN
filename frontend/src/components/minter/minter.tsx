@@ -15,6 +15,7 @@ import {
 } from "wagmi";
 
 import { Alchemy, Network } from "alchemy-sdk";
+import Confetti from "react-confetti";
 
 const NFT_CONTRACT = process.env.NEXT_PUBLIC_NFT_CONTRACT as `0x${string}`;
 const TOKEN_CONTRACT = process.env.NEXT_PUBLIC_TOKEN_CONTRACT as `0x${string}`;
@@ -62,6 +63,7 @@ export default function Minter({}: Props) {
   const [message, setMessage] = useState<string>(
     "Draw a card and win up to 600K $EARN!",
   );
+  const [explode, setExplode] = useState<boolean>(false);
 
   // get account address
   const { address, isConnecting, isDisconnected, isConnected } = useAccount({});
@@ -218,14 +220,39 @@ export default function Minter({}: Props) {
 
   // set image path
   useEffect(() => {
+    async function checkWin() {
+      const nfts = await alchemy.nft.getNftsForOwner(address as string, {
+        contractAddresses,
+      });
+      let totalWin: number = 0;
+      for (const nft of nfts["ownedNfts"].slice(-quantity)) {
+        const id = nft.tokenId;
+        console.log(id);
+        const meta = await alchemy.nft.getNftMetadata(NFT_CONTRACT, id, {});
+        const trait = meta.rawMetadata?.attributes?.[0]["value"].slice(0, 3);
+        const win = trait == "ZER" ? 0 : Number(trait);
+        totalWin += win;
+      }
+      return totalWin;
+    }
+
     if (isMintLoading && isConnected) {
       setImagePath("/nftAnimation.gif");
+      setExplode(false);
     } else if (!isMintLoading && isMintSuccess && isConnected) {
       setImagePath("/play.jpg");
       setMessage("Drawing completed. Check your wins!");
+      checkWin().then((win) => {
+        win > 0 ? setExplode(true) : setExplode(false);
+      });
     } else {
       setImagePath("/play.jpg");
+      setExplode(false);
     }
+    // let timer1 = setTimeout(() => setExplode(false), 5 * 1000);
+    // return () => {
+    //   clearTimeout(timer1);
+    // };
   }, [isMintLoading, isMintSuccess]);
 
   useEffect(() => {
@@ -361,6 +388,20 @@ export default function Minter({}: Props) {
 
   return (
     <div className="mx-auto h-full w-full max-w-sm flex-col justify-between rounded-lg bg-black p-8 shadow-inner-sym md:max-w-none">
+      {explode && (
+        <Confetti
+          colors={[
+            "#fbbf24",
+            "#d97706",
+            "#fef08a",
+            "#fefce8",
+            "#b45309",
+            "#fde68a",
+          ]}
+          recycle={false}
+          numberOfPieces={1000}
+        />
+      )}
       <div className="mx-auto mb-4 w-full max-w-xs overflow-hidden rounded border-2 border-white bg-white">
         <Image
           src={imagePath}

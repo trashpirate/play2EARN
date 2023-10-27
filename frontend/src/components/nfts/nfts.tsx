@@ -87,6 +87,7 @@ export default function Nfts({}: Props) {
         totalWin += win;
       }
       setTotalWin(totalWin);
+
       let nftArray: NFTMeta[] = [];
       const maxShow = maxPerWallet ? maxPerWallet : 10;
       for (let index = 1; index <= maxShow; index++) {
