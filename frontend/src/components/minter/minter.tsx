@@ -218,45 +218,11 @@ export default function Minter({}: Props) {
 
   // set image path
   useEffect(() => {
-    async function getNFT() {
-      const nfts = await alchemy.nft.getNftsForOwner(address as string, {
-        contractAddresses,
-      });
-      if (nfts != undefined) {
-        let totalWin: number = 0;
-        for (const nft of nfts["ownedNfts"]) {
-          const id = nft.tokenId;
-          const meta = await alchemy.nft.getNftMetadata(NFT_CONTRACT, id, {});
-          const trait = meta.rawMetadata?.attributes?.[0]["value"].slice(0, 3);
-          const win = trait == "ZER" ? 0 : Number(trait);
-          totalWin += win;
-        }
-        if (totalWin > 0)
-          setMessage(`Congrats, you won a total of ${totalWin}K EARN tokens!`);
-        else setMessage("Too bad, no win this time!");
-
-        const nftLatest = nfts["ownedNfts"].at(-1);
-
-        let imageURL: string = "/unrevealed.jpg";
-
-        const res = await fetch(
-          `https://bafybeigjenvitrwsrknmvatdtt3rxv4rgswamwl63souemwq5cuktyzrgq.ipfs.nftstorage.link/${nftLatest.tokenId}`,
-        );
-        const json = await res.json();
-        const [prefix, separator, url, color, name] = json.image.split("/");
-        imageURL = `https://bafybeia6bsfqa4zugsyx4b35x6gueg6h4ljlq5s66oazg7yxqx3oyujs6u.ipfs.nftstorage.link/${color}/${name}`;
-        setImagePath(imageURL);
-      } else {
-        console.log("nft fetch failed");
-        setImagePath("/play.jpg");
-        setMessage("Draw a card and win up to 600K $EARN!");
-      }
-    }
-
     if (isMintLoading && isConnected) {
       setImagePath("/nftAnimation.gif");
     } else if (!isMintLoading && isMintSuccess && isConnected) {
-      getNFT();
+      setImagePath("/play.jpg");
+      setMessage("Drawing completed. Check your wins!");
     } else {
       setImagePath("/play.jpg");
     }
