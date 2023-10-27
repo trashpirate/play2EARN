@@ -16,7 +16,7 @@ export default function ClaimPrize({}: Props) {
         </div>
         <div>
           To claim your prize, send your winning NFT Cards to the address above
-          and you will receive your prize within 24hrs.
+          and you will receive your prize within 48hrs.
         </div>
       </div>
     </div>
