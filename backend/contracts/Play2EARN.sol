@@ -1,3 +1,13 @@
+/**
+        BUY, HOLD, EARN, BURN!
+        X: https://twitter.com/buyholdearn
+        Telegram: https://t.me/buyholdearn
+        Website: http://buyholdearn.com
+        Mint: http://app.buyholdearn.com
+        Play: http://play.buyholdearn.com
+        
+ */
+
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
@@ -21,7 +31,7 @@ contract Play2EARN is ERC721A, Ownable {
         address initialFeeAddress,
         address tokenAddress,
         string memory baseURI
-    ) ERC721A("Play2EARN", "EARNY") Ownable(msg.sender) {
+    ) ERC721A("Play2EARN", "P2EARN") Ownable(msg.sender) {
         require(initialFeeAddress != address(0), "Fee address is zero address");
         feeAddress = initialFeeAddress;
         paymentToken = IERC20(tokenAddress);

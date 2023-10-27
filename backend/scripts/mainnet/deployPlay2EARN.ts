@@ -1,9 +1,10 @@
 import {ethers} from "ethers";
-import {Flames__factory} from "../../typechain-types";
+import {Play2EARN__factory} from "../../typechain-types";
 import * as dotenv from "dotenv";
 dotenv.config();
 
 const TOKEN_ADDRESS = "0x0b61C4f33BCdEF83359ab97673Cb5961c6435F4E";
+const BASE_URI = "ipfs://bafybeigjenvitrwsrknmvatdtt3rxv4rgswamwl63souemwq5cuktyzrgq/";
 
 async function main() {
 
@@ -30,8 +31,8 @@ async function main() {
     const receiver = process.env.FEE_ADDRESS_MAINNET as string;
     const tokenAdress = TOKEN_ADDRESS;
 
-    const contractFactory = new Flames__factory(wallet);
-    const contract = await contractFactory.deploy(owner, receiver, tokenAdress);
+    const contractFactory = new Play2EARN__factory(wallet);
+    const contract = await contractFactory.deploy(owner, receiver, tokenAdress, BASE_URI);
     await contract.waitForDeployment();
     const contractAddress = await contract.getAddress();
     console.log(`Token contract deployed at ${ contractAddress }`);

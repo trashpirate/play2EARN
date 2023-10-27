@@ -9,7 +9,7 @@ const BASE_URI = "ipfs://bafybeigjenvitrwsrknmvatdtt3rxv4rgswamwl63souemwq5cukty
 
 
 const constructorArguments = [process.env.OWNER_ADDRESS_TESTNET, process.env.FEE_ADDRESS_TESTNET, TOKEN_ADDRESS, BASE_URI];
-const contractAddress = "0xa84517F6E1448B7d6Cb50c8Af1579F8bEB6092C7";
+const contractAddress = "0x3F5FD632271db2467fac91D4d87cED0e7eA09C34";
 
 async function main() {
 
