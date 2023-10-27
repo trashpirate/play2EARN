@@ -37,7 +37,6 @@ export default function Nfts({}: Props) {
   const [nftsOwned, setNftsOwned] = useState<NFTMeta[] | null>(null);
   const [totalWin, setTotalWin] = useState<number>(0);
 
-
   // get account address
   const { address, isConnecting, isDisconnected, isConnected } = useAccount({});
 
@@ -81,11 +80,11 @@ export default function Nfts({}: Props) {
       });
       let totalWin: number = 0;
       for (const nft of nfts["ownedNfts"]) {
-          const id = nft.tokenId
-            const meta = await alchemy.nft.getNftMetadata(NFT_CONTRACT, id,{});
-            const trait = meta.rawMetadata?.attributes?.[0]['value'].slice(0,3);
-            const win = trait == 'ZER' ? 0 : Number(trait);
-            totalWin += win;
+        const id = nft.tokenId;
+        const meta = await alchemy.nft.getNftMetadata(NFT_CONTRACT, id, {});
+        const trait = meta.rawMetadata?.attributes?.[0]["value"].slice(0, 3);
+        const win = trait == "ZER" ? 0 : Number(trait);
+        totalWin += win;
       }
       setTotalWin(totalWin);
       let nftArray: NFTMeta[] = [];
@@ -128,13 +127,13 @@ export default function Nfts({}: Props) {
   }, [isConnected, totalSupply, address, maxPerWallet]);
 
   return (
-    <div className="pb-8 w-full h-full">
-      <div className="mx-auto max-w-sm rounded-md bg-black p-8 sm:w-full md:max-w-none shadow-inner-sym h-full">
-        <h2 className="border-b-2 border-yellow-500 pb-2 text-xl uppercase text-justify">
+    <div className="h-full w-full pb-8">
+      <div className="mx-auto h-full max-w-sm rounded-md bg-black p-8 shadow-inner-sym sm:w-full md:max-w-none">
+        <h2 className="border-b-2 border-yellow-500 pb-2 text-justify text-xl uppercase">
           {`Your Cards  -  Win: ${totalWin}K $EARN`}
         </h2>
         <div className="my-4 min-h-max">
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 place-content-center gap-4 ">
+          <div className="grid grid-cols-2 place-content-center gap-4 sm:grid-cols-3 md:grid-cols-5 ">
             {nftsOwned != null &&
               nftsOwned.map(function (nft) {
                 let hover: string = "";
@@ -142,7 +141,7 @@ export default function Nfts({}: Props) {
                 return (
                   <Link
                     key={nft.id}
-                    href={`https://rarible.com/token/${NFT_CONTRACT}:${nft.id}`}
+                    href={`${process.env.NEXT_PUBLIC_NETWORK_SCAN}/nft/${NFT_CONTRACT}/${nft.id}`}
                   >
                     <div
                       className={

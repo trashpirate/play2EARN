@@ -113,11 +113,11 @@ export default function AccountInfo({}: Props) {
 
   return (
     <div className="h-full w-full ">
-      <div className="mx-auto max-w-sm rounded-md  bg-black p-8 md:max-w-none shadow-inner-sym h-full">
+      <div className="mx-auto h-full max-w-sm  rounded-md bg-black p-8 shadow-inner-sym md:max-w-none">
         <h2 className="mb-4 border-b-2 border-yellow-500 pb-2 text-xl">
           ACCOUNT INFO
         </h2>
-        <div className="py-2">
+        <div className="mb-4 py-2">
           <ConnectButton
             accountStatus="address"
             showBalance={true}
