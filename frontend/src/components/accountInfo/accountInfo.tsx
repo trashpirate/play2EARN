@@ -92,7 +92,10 @@ export default function AccountInfo({}: Props) {
     if (isLoading) {
       text = "Loading...";
     } else if (isSuccess && tokenBalance != null) {
-      text = `${tokenBalance.toFixed(0)} EARN`;
+      text = `${tokenBalance.toLocaleString(undefined, {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+      })} EARN`;
     } else {
       text = "---";
     }

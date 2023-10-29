@@ -1,6 +1,8 @@
+"use client";
 import Navbar from "@/components/navigation/navbar";
 import React from "react";
 import AdminPanel from "./adminPanel";
+import Win from "./wins";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 type Props = {};
@@ -15,6 +17,7 @@ export default function Admin({}: Props) {
           chainStatus="icon"
         />
         <AdminPanel></AdminPanel>
+        <Win></Win>
       </section>
     </main>
   );

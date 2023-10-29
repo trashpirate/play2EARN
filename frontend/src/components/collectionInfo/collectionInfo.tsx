@@ -2,39 +2,19 @@
 import React, { useEffect, useState } from "react";
 import { useContractRead, useNetwork } from "wagmi";
 
-import { tokenABI } from "@/assets/tokenABI";
 import { nftABI } from "@/assets/nftABI";
 
 import Image from "next/image";
 import CopyToClipboard from "../copyToClipboard";
-import {Alchemy, Network, NftMetadataBatchToken} from "alchemy-sdk";
 const NFT_CONTRACT = process.env.NEXT_PUBLIC_NFT_CONTRACT as `0x${string}`;
-const TOKEN_CONTRACT = process.env.NEXT_PUBLIC_TOKEN_CONTRACT as `0x${string}`;
 
 type Props = {};
-
-const config = {
-  apiKey: process.env.NEXT_PUBLIC_ALCHEMY_API_KEY,
-  network:
-    process.env.NEXT_PUBLIC_TESTNET == "true"
-      ? Network.ETH_GOERLI
-      : Network.ETH_MAINNET,
-};
-
-const alchemy = new Alchemy(config);
 
 export default function CollectionInfo({}: Props) {
   const [totalSupply, setTotalSupply] = useState<number | undefined>(undefined);
 
   // get chain
   const { chain } = useNetwork();
-
-  // define token contract config
-  const tokenContract = {
-    address: TOKEN_CONTRACT,
-    abi: tokenABI,
-    chainId: chain?.id,
-  };
 
   // define token contract config
   const nftContract = {
@@ -51,7 +31,7 @@ export default function CollectionInfo({}: Props) {
     cacheTime: 1000,
   });
 
-  useEffect(() => {    
+  useEffect(() => {
     if (data != undefined) {
       setTotalSupply(Number(data));
     }
@@ -62,7 +42,7 @@ export default function CollectionInfo({}: Props) {
     if (isLoading) {
       text = "Loading...";
     } else if (isSuccess && totalSupply != undefined) {
-      text = `${totalSupply}`;
+      text = `${totalSupply.toLocaleString()}`;
     } else {
       text = "---";
     }
@@ -74,7 +54,7 @@ export default function CollectionInfo({}: Props) {
     if (isLoading) {
       text = "Loading...";
     } else if (isSuccess && totalSupply != undefined) {
-      text = `${100 - totalSupply}`;
+      text = `${(10000 - totalSupply).toLocaleString()}`;
     } else {
       text = "---";
     }
