@@ -1,5 +1,5 @@
 import CopyToClipboard from "../copyToClipboard";
-const CLAIM_ADDRESS = "0xb75D371Fad387ebc95F80D278208E442CAa4a2E3";
+const CLAIM_ADDRESS = "0x0cf66382d52C2D6c1D095c536c16c203117E2B2f";
 
 type Props = {};
 
