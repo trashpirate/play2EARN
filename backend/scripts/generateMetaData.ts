@@ -2,7 +2,7 @@ import fs from "fs";
 import process from "process";
 import {readdir} from "fs/promises";
 
-const url = "ipfs://bafybeia6bsfqa4zugsyx4b35x6gueg6h4ljlq5s66oazg7yxqx3oyujs6u/";
+const url = "ipfs://bafybeigpd4tpmhgmkxwrm6hzlzgfpvuldnt27e5hayxkdhhxpfg42ipdcu/";
 
 interface metaData {
   name: string;
@@ -69,8 +69,8 @@ async function main() {
     // write metadata file
     let json: metaData;
     json = {
-      name: "Card #" + (index + 1).toString(),
-      description: win == 'ZERO' ? 'Too bad - no win!' : `Congrats, you won! You can claim ${ win } $EARN tokens!`,
+      name: "Card #" + (index).toString(),
+      description: win == 'ZERO' ? 'Too bad - no win!' : `Congrats, you won! You can claim ${ win } EARN tokens!`,
       image:
         url +
         win + '/' + name.toString(),

@@ -4,7 +4,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 const TOKEN_ADDRESS = "0x0b61C4f33BCdEF83359ab97673Cb5961c6435F4E";
-const BASE_URI = "ipfs://bafybeigjenvitrwsrknmvatdtt3rxv4rgswamwl63souemwq5cuktyzrgq/";
+const BASE_URI = "ipfs://bafybeigjdddb36jqff7ekfmcrinb7dlybsssvwik6dwnrx3wjexwbzpqoa/";
 
 async function main() {
 

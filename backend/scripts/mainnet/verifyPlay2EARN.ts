@@ -5,10 +5,10 @@ dotenv.config();
 
 // run this script with hardhat: npx hardhat run ./scripts/mainnet/verifyPlay2EARN.ts --network ETH_MAINNET
 const TOKEN_ADDRESS = "0x0b61C4f33BCdEF83359ab97673Cb5961c6435F4E";
-const BASE_URI = "ipfs://bafybeigjenvitrwsrknmvatdtt3rxv4rgswamwl63souemwq5cuktyzrgq/";
+const BASE_URI = "ipfs://bafybeigjdddb36jqff7ekfmcrinb7dlybsssvwik6dwnrx3wjexwbzpqoa/";
 
 const constructorArguments = [process.env.OWNER_ADDRESS_MAINNET, process.env.FEE_ADDRESS_MAINNET, TOKEN_ADDRESS, BASE_URI];
-const contractAddress = "0x3287d32Dc9917b0daA39874541AE5269A7C6fCaE";
+const contractAddress = "0xEEb56f062E2284E6e212172966e6B9a79372e790";
 
 async function main() {
 
