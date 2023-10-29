@@ -16,7 +16,7 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract Play2EARN is ERC721A, Ownable {
-    uint256 public constant MAX_SUPPLY = 100;
+    uint256 public constant MAX_SUPPLY = 10000;
 
     IERC20 public immutable paymentToken;
     address public feeAddress;
