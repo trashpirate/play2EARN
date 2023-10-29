@@ -13,7 +13,7 @@ export default function Home() {
       <div className="mx-auto h-full w-full flex-col items-center justify-between xl:w-4/5 2xl:w-3/4">
         <Navbar></Navbar>
         <h1 className="my-8 text-center text-xl font-bold uppercase drop-shadow-text xs:text-2xl md:text-3xl">
-          Round 1
+          Round 2
         </h1>
         <div className="mt-4rem grid w-full grid-cols-1 justify-between justify-items-stretch gap-4 md:grid-cols-[25%_30%_40%]">
           <div className="flex h-full w-full flex-col justify-stretch">
